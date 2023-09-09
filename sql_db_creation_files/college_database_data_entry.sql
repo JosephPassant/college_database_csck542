@@ -1,9 +1,16 @@
+-- Use the 'college' database
 USE college;
 
+-- Insert data into the admins table
+-- Columns: forename, surname, username, user_password
+-- Values: Provided for each admin
 INSERT INTO admins (forename, surname, username, user_password) VALUES
 ('George', 'Lucas', 'george_lucas', 'password1'),
 ('Jeffrey', 'Abrams', 'jeffrey_abrams', 'password2');
 
+-- Insert data into the teachers table
+-- Columns: forename, surname, username, user_password
+-- Values: Provided for each teacher
 INSERT INTO teachers (forename, surname, username, user_password) VALUES
 ('Yoda', 'Master', 'master_yoda', 'password3'),
 ('Mace', 'Windu', 'mace_windu', 'password4'),
@@ -13,6 +20,9 @@ INSERT INTO teachers (forename, surname, username, user_password) VALUES
 ('Shaak', 'Ti', 'shaak_ti', 'password8'),
 ('Kit', 'Fisto', 'kit_fisto', 'password9');
 
+-- Insert data into the students table
+-- Columns: forename, surname, username, user_password
+-- Values: Provided for each students
 INSERT INTO students (forename, surname, username, user_password) VALUES
 ('Luke', 'Skywalker', 'luke_skywalker', 'password10'),
 ('Leia', 'Organa', 'leia_organa', 'password11'),
@@ -35,6 +45,9 @@ INSERT INTO students (forename, surname, username, user_password) VALUES
 ('Admiral', 'Ackbar', 'admiral_ackbar', 'password28'),
 ('Rose', 'Tico', 'rose_tico', 'password29');
 
+-- Insert data into the course table
+-- Column: course_name
+-- Values: Provided for each course
 INSERT INTO courses (course_name) VALUES
 ('Jedi 101'),
 ('The Force'),
@@ -47,6 +60,9 @@ INSERT INTO courses (course_name) VALUES
 ('Combat'),
 ('Politics');
 
+-- Insert data into the 'semesters' table
+-- Columns: semester_name, start_date, end_date
+-- Values: Provided for each semester
 INSERT INTO semesters (semester_name, start_date, end_date) VALUES
 ('Fall 2023', '2023-09-01', '2023-12-20'),
 ('Spring 2024', '2024-01-15', '2024-05-15');
