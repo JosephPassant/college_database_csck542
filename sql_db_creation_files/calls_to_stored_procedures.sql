@@ -54,3 +54,8 @@ CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 6, 4);
 CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 7, 1);
 CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 8, 2);
 CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 9, 9);
+
+-- Calls the AssignResultToCourse procedure in order to assign a Pass / Fail result to a student
+-- This updates the result collumn in the course_student table
+CALL AssignResultToStudent('master_yoda', 'password3', 1, 1, 'Pass');
+CALL AssignResultToStudent('master_yoda', 'password3', 1, 2, 'Pass');
