@@ -20,3 +20,37 @@ CALL AssignCourseToTeacher('george_lucas', 'password1', 2, 2);
 CALL AssignCourseToTeacher('george_lucas', 'password1', 3, 4);
 CALL AssignCourseToTeacher('jeffrey_abrams', 'password2', 4, 6);
 CALL AssignCourseToTeacher('jeffrey_abrams', 'password2', 5, 9);
+
+
+-- Calls the AssignStudentToCourse procedure in order to enroll students on
+-- courses populating the course_student table
+-- The course_semester table must be populated prior to calling this procedure
+CALL AssignStudentToCourse('george_lucas', 'password1', 1, 1);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 2, 2);
+CALL AssignStudentToCourse('george_lucas', 'password1', 3, 4);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 4, 6);
+CALL AssignStudentToCourse('george_lucas', 'password1', 5, 9);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 6, 1);
+CALL AssignStudentToCourse('george_lucas', 'password1', 7, 2);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 8, 4);
+CALL AssignStudentToCourse('george_lucas', 'password1', 9, 6);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 10, 9);
+CALL AssignStudentToCourse('george_lucas', 'password1', 11, 1);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 12, 2);
+CALL AssignStudentToCourse('george_lucas', 'password1', 13, 4);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 14, 6);
+CALL AssignStudentToCourse('george_lucas', 'password1', 15, 9);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 16, 9);
+CALL AssignStudentToCourse('george_lucas', 'password1', 17, 1);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 18, 2);
+CALL AssignStudentToCourse('george_lucas', 'password1', 19, 4);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 20, 6);
+CALL AssignStudentToCourse('george_lucas', 'password1', 1,9);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 2, 9);
+CALL AssignStudentToCourse('george_lucas', 'password1', 3, 2);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 4, 9);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 5, 6);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 6, 4);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 7, 1);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 8, 2);
+CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 9, 9);
