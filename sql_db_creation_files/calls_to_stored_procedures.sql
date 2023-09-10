@@ -68,3 +68,8 @@ CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 9, 9);
 -- selected_student_id INT, selected_course_semester_id INT,
 -- given_result ENUM('Pass', 'Fail'))
 CALL AssignResultToStudent('master_yoda', 'password3', 1, 1, 'Pass');
+CALL AssignResultToStudent('mace_windu', 'password4', 2, 2,'Fail');
+CALL AssignResultToStudent('obi-wan_Kenobi', 'password5', 3, 4, 'Pass');
+CALL AssignResultToStudent('ki-adi_mundi', 'password6', 4, 6, 'Pass');
+CALL AssignResultToStudent('plo_koon', 'password7', 5, 9, 'Pass');
+
