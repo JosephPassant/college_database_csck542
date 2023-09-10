@@ -39,7 +39,7 @@ CREATE TABLE `admins` (
 
 LOCK TABLES `admins` WRITE;
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` VALUES (1,'George','Lucas','george_lucas','password1'),(2,'Jeffrey','Abrams','jeffrey_abrams','password2');
+INSERT INTO `admins` VALUES (1,'George','Lucas','george_lucas','0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e'),(2,'Jeffrey','Abrams','jeffrey_abrams','6cf615d5bcaac778352a8f1f3360d23f02f34ec182e259897fd6ce485d7870d4');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,7 +220,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (1,'Luke','Skywalker','luke_skywalker','password10'),(2,'Leia','Organa','leia_organa','password11'),(3,'Han','Solo','han_solo','password12'),(4,'Bacca','Chew','chew_bacca','password13'),(5,'Lando','Calrissian','lando_calrissian','password14'),(6,'Padme','Amidala','padme_amidala','password15'),(7,'Anakin','Skywalker','anakin_skywalker','password16'),(8,'Rey','Skywalker','rey_skywalker','password17'),(9,'FN','2187','FN_2187','password18'),(10,'Poe','Dameron','poe_dameron','password19'),(11,'BB','8','bb_8','password20'),(12,'C','3PO','c_3po','password21'),(13,'D2','R2','r2_d2','password22'),(14,'Qui-Gon','Jinn','qui_gon_jinn','password23'),(15,'Shmi','Skywalker','shmi_skywalker','password24'),(16,'Bail','Organa','bail_organa','password25'),(17,'Mon','Mothma','mon_mothma','password26'),(18,'Wedge','Antilles','wedge_antilles','password27'),(19,'Admiral','Ackbar','admiral_ackbar','password28'),(20,'Rose','Tico','rose_tico','password29');
+INSERT INTO `students` VALUES (1,'Luke','Skywalker','luke_skywalker','aa4a9ea03fcac15b5fc63c949ac34e7b0fd17906716ac3b8e58c599cdc5a52f0'),(2,'Leia','Organa','leia_organa','53d453b0c08b6b38ae91515dc88d25fbecdd1d6001f022419629df844f8ba433'),(3,'Han','Solo','han_solo','b3d17ebbe4f2b75d27b6309cfaae1487b667301a73951e7d523a039cd2dfe110'),(4,'Bacca','Chew','chew_bacca','48caafb68583936afd0d78a7bfd7046d2492fad94f3c485915f74bb60128620d'),(5,'Lando','Calrissian','lando_calrissian','c6863e1db9b396ed31a36988639513a1c73a065fab83681f4b77adb648fac3d6'),(6,'Padme','Amidala','padme_amidala','c63c2d34ebe84032ad47b87af194fedd17dacf8222b2ea7f4ebfee3dd6db2dfb'),(7,'Anakin','Skywalker','anakin_skywalker','17a3379984b560dc311bb921b7a46b28aa5cb495667382f887a44a7fdbca7a7a'),(8,'Rey','Skywalker','rey_skywalker','69bfb918de05145fba9dcee9688dfb23f6115845885e48fa39945eebb99d8527'),(9,'FN','2187','FN_2187','d2042d75a67922194c045da2600e1c92ff6d87e8fb6e0208606665f2d1dfa892'),(10,'Poe','Dameron','poe_dameron','5790ac3d0b8ae8afc72c2c6fb97654f2b73651c328de0a3b74854ade562dd17a'),(11,'BB','8','bb_8','7535d8f2d8c35d958995610f971287288ab5e8c82a3c4fdc2b6fb5d757a5b9f8'),(12,'C','3PO','c_3po','91a9ef3563010ea1af916083f9fb03a117d4d0d2a697f82368da1f737629f717'),(13,'D2','R2','r2_d2','d23c1038532dc71d0a60a7fb3d330d7606b7520e9e5ee0ddcdb27ee1bd5bc0cd'),(14,'Qui-Gon','Jinn','qui_gon_jinn','8b807aa0505a00b3ef49e26a2ade8e31fcd6c700d1a3aeee971b49d73da8e8ff'),(15,'Shmi','Skywalker','shmi_skywalker','fc8a9296208a0b281f84690423c5d77785e493f435e6292cc322840f543729d3'),(16,'Bail','Organa','bail_organa','0b544d6d8da1d1af25318e97e0ac5f6bc70bba49919463dc0074ede01a49d381'),(17,'Mon','Mothma','mon_mothma','869f2a98b0e3a6ea928ff0542330ea3c1e0ff8591801693350f1fc3f1e57e4c5'),(18,'Wedge','Antilles','wedge_antilles','9c7568513b9c85e73f3650c8b00e3259501096ccee9d3dbdae6ff5e84aabe3af'),(19,'Admiral','Ackbar','admiral_ackbar','6f5ea1c4acc7a563ea8cb3381a55f0183a2394d679ebb7db8312e047bbf87e0d'),(20,'Rose','Tico','rose_tico','48a94846b2a7386432b90ad13bcf9c66f1efdd3a97e0e14968c262c412fe22c8');
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,7 +248,7 @@ CREATE TABLE `teachers` (
 
 LOCK TABLES `teachers` WRITE;
 /*!40000 ALTER TABLE `teachers` DISABLE KEYS */;
-INSERT INTO `teachers` VALUES (1,'Yoda','Master','master_yoda','password3'),(2,'Mace','Windu','mace_windu','password4'),(3,'Obi-Wan','Kenobi','obi-wan_kenobi','password5'),(4,'Ki-Adi','Mundi','ki-adi_mundi','password6'),(5,'Plo','Koon','plo_koon','password7'),(6,'Shaak','Ti','shaak_ti','password8'),(7,'Kit','Fisto','kit_fisto','password9');
+INSERT INTO `teachers` VALUES (1,'Yoda','Master','master_yoda','5906ac361a137e2d286465cd6588ebb5ac3f5ae955001100bc41577c3d751764'),(2,'Mace','Windu','mace_windu','b97873a40f73abedd8d685a7cd5e5f85e4a9cfb83eac26886640a0813850122b'),(3,'Obi-Wan','Kenobi','obi-wan_kenobi','8b2c86ea9cf2ea4eb517fd1e06b74f399e7fec0fef92e3b482a6cf2e2b092023'),(4,'Ki-Adi','Mundi','ki-adi_mundi','598a1a400c1dfdf36974e69d7e1bc98593f2e15015eed8e9b7e47a83b31693d5'),(5,'Plo','Koon','plo_koon','5860836e8f13fc9837539a597d4086bfc0299e54ad92148d54538b5c3feefb7c'),(6,'Shaak','Ti','shaak_ti','57f3ebab63f156fd8f776ba645a55d96360a15eeffc8b0e4afe4c05fa88219aa'),(7,'Kit','Fisto','kit_fisto','9323dd6786ebcbf3ac87357cc78ba1abfda6cf5e55cd01097b90d4a286cac90e');
 /*!40000 ALTER TABLE `teachers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-10 16:21:54
+-- Dump completed on 2023-09-10 16:54:36
