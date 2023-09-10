@@ -71,7 +71,7 @@ CREATE TABLE courses (
 
 CREATE TABLE semesters (
 	semester_id INT AUTO_INCREMENT PRIMARY KEY,
-    semester_name VARCHAR(10)NOT NULL,
+    semester_name VARCHAR(30)NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL
     );
