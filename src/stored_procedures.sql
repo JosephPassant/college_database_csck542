@@ -17,7 +17,7 @@ BEGIN
     -- Validate admin credentials by counting matching records in the 'admins' table
     SELECT COUNT(*) INTO admin_count 
     FROM admins 
-    WHERE username = admin_username AND user_password = admin_password;
+    WHERE username = admin_username AND user_password = SHA2(admin_password,256);
 
     -- If admin credentials are valid (count is 1), proceed
     IF admin_count = 1 THEN
@@ -56,7 +56,7 @@ BEGIN
     -- Validate admin credentials by counting matching records in the 'admins' table
     SELECT COUNT(*) INTO admin_count 
     FROM admins 
-    WHERE username = admin_username AND user_password = admin_password;
+    WHERE username = admin_username AND user_password = SHA2(admin_password,256);
 
     -- If admin credentials are valid (count is 1), proceed
     IF admin_count = 1 THEN
@@ -95,7 +95,7 @@ BEGIN
     -- Validate admin credentials by counting matching records in the 'admins' table
     SELECT COUNT(*) INTO admin_count 
     FROM admins 
-    WHERE username = admin_username AND user_password = admin_password;
+    WHERE username = admin_username AND user_password = SHA2(admin_password,256);
 
     -- If admin credentials are valid (count is 1), proceed
     IF admin_count = 1 THEN
@@ -137,12 +137,12 @@ BEGIN
     -- Validate teacher credentials by counting matching records in the 'teachers' table
     SELECT COUNT(*) INTO teacher_count 
     FROM teachers 
-    WHERE username = teacher_username AND user_password = teacher_password;
+    WHERE username = teacher_username AND user_password = SHA2(teacher_password,256);
 
     -- Get the teacher_id for the authenticated teacher
     SELECT teacher_id INTO selected_teacher_id
     FROM teachers
-    WHERE username = teacher_username AND user_password = teacher_password;
+    WHERE username = teacher_username AND user_password = SHA2(teacher_password,256);
 
     -- Check if the teacher is assigned to the course for the given semester
     SELECT COUNT(*) INTO teacher_course_count
@@ -200,7 +200,7 @@ proc_label: BEGIN  -- Define a label at the beginning of the compound statement
     FROM students 
     WHERE student_id = studentID;
     
-    IF actual_password != student_password THEN
+    IF actual_password != SHA2(student_password,256) THEN
         SELECT 'Invalid password' AS message;
         LEAVE proc_label;  -- Use LEAVE followed by the label name
     END IF;
@@ -255,7 +255,7 @@ proc_label: BEGIN
     FROM students 
     WHERE student_id = studentID;
 
-    IF actual_password != studentPassword THEN
+    IF actual_password != SHA2(studentPassword,256) THEN
         SELECT 'Invalid password' AS message;
         LEAVE proc_label;  -- Use LEAVE followed by the label name
     END IF;
@@ -290,7 +290,7 @@ proc_label: BEGIN
     FROM teachers 
     WHERE teacher_id = teacherID;
     
-    IF actual_password != teacher_password THEN
+    IF actual_password != SHA2(teacher_password, 256) THEN
         SELECT 'Invalid password' AS message;
         LEAVE proc_label;  -- Use LEAVE followed by the label name
     END IF;
