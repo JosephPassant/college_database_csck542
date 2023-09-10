@@ -240,7 +240,7 @@ proc_label: BEGIN  -- Define a label at the beginning of the compound statement
             SELECT 'Student is already enrolled in this course for the current semester' AS message;
         END IF;
     END IF;
-END
+END;
 
 
 CREATE PROCEDURE GetStudentCoursesAndResults(
@@ -276,7 +276,7 @@ proc_label: BEGIN
     WHERE 
         cs.student_id = studentID;
         
-END
+END;
 
 CREATE PROCEDURE ViewStudentsInMyCourses(
     IN teacherID INT,
@@ -317,8 +317,7 @@ proc_label: BEGIN
         students AS s ON cs.student_id = s.student_id
     WHERE 
         t.teacher_id = teacherID;
-END
-
+END;
 //
 -- Reset the delimiter back to its default value
 DELIMITER ;

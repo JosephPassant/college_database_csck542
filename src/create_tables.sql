@@ -125,7 +125,7 @@ CREATE TABLE course_student (
 course_student_id INT AUTO_INCREMENT PRIMARY KEY,
 student_id INT, 
 course_semester_id INT,
-result ENUM('pass', 'fail'),
+result ENUM('Pass', 'Fail'),
 FOREIGN KEY (student_id) REFERENCES students(student_id),
 FOREIGN KEY (course_semester_id) REFERENCES course_semester(course_semester_id),
 UNIQUE (student_id, course_semester_id)
