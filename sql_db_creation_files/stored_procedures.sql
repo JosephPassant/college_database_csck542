@@ -174,6 +174,151 @@ BEGIN
     END IF;
 END;
 
+
+CREATE PROCEDURE EnrollInCourse(
+    IN studentID INT,
+    IN student_password VARCHAR(255),
+    IN selected_course_name VARCHAR(255),
+    IN selected_semester_name VARCHAR(30)
+)
+proc_label: BEGIN  -- Define a label at the beginning of the compound statement
+    DECLARE course_available INT;
+    DECLARE is_already_enrolled INT;
+    DECLARE selected_course_id INT;
+    DECLARE selected_semester_id INT;
+    DECLARE selected_course_semester_id INT;
+    DECLARE actual_password VARCHAR(255);
+    
+	-- Declare a handler for duplicate key error
+    DECLARE CONTINUE HANDLER FOR 1062
+    BEGIN
+        SELECT 'Student is already enrolled in this course for the current semester' AS message;
+    END;
+
+    -- Verify the student's password
+    SELECT user_password INTO actual_password 
+    FROM students 
+    WHERE student_id = studentID;
+    
+    IF actual_password != student_password THEN
+        SELECT 'Invalid password' AS message;
+        LEAVE proc_label;  -- Use LEAVE followed by the label name
+    END IF;
+
+    -- Get the selected_course_id and selected_semester_id
+    SELECT course_id INTO selected_course_id 
+    FROM courses 
+    WHERE course_name = selected_course_name;
+    
+    SELECT semester_id INTO selected_semester_id 
+    FROM semesters 
+    WHERE semester_name = selected_semester_name;
+
+    -- Check course availability by cross-referencing with course_semester table
+    SELECT COUNT(*) INTO course_available
+    FROM course_semester
+    WHERE course_id = selected_course_id AND semester_id = selected_semester_id;
+
+    -- Check if the student is already enrolled in the course for the current semester
+    SELECT COUNT(*) INTO is_already_enrolled
+    FROM course_student 
+    WHERE course_semester_id = selected_course_semester_id AND student_id = studentID;
+
+    -- If the course is available and the student is not already enrolled, then enroll the student
+    IF course_available > 0 AND is_already_enrolled = 0 THEN
+        SELECT course_semester_id INTO selected_course_semester_id 
+        FROM course_semester 
+        WHERE course_id = selected_course_id AND semester_id = selected_semester_id;
+        
+        INSERT INTO course_student (student_id, course_semester_id)
+        VALUES (studentID, selected_course_semester_id);
+    ELSE
+        -- Output a message if the course is not available or the student is already enrolled
+        IF course_available = 0 THEN
+            SELECT 'Course is not available in the current semester' AS message;
+        ELSE
+            SELECT 'Student is already enrolled in this course for the current semester' AS message;
+        END IF;
+    END IF;
+END
+
+
+CREATE PROCEDURE GetStudentCoursesAndResults(
+    IN studentID INT,
+    IN studentPassword VARCHAR(255)
+)
+proc_label: BEGIN
+    DECLARE actual_password VARCHAR(255);
+
+    -- Verify the student's password
+    SELECT user_password INTO actual_password 
+    FROM students 
+    WHERE student_id = studentID;
+
+    IF actual_password != studentPassword THEN
+        SELECT 'Invalid password' AS message;
+        LEAVE proc_label;  -- Use LEAVE followed by the label name
+    END IF;
+
+    -- If password is verified, fetch the enrolled courses and grades
+    SELECT 
+        c.course_name,
+        s.semester_name,
+        cs.result  -- Assuming result is stored in course_student table
+    FROM 
+        course_student AS cs
+    JOIN 
+        course_semester AS csem ON cs.course_semester_id = csem.course_semester_id
+    JOIN 
+        courses AS c ON csem.course_id = c.course_id
+    JOIN 
+        semesters AS s ON csem.semester_id = s.semester_id
+    WHERE 
+        cs.student_id = studentID;
+        
+END
+
+CREATE PROCEDURE ViewStudentsInMyCourses(
+    IN teacherID INT,
+    IN teacher_password VARCHAR(255)
+)
+proc_label: BEGIN
+    DECLARE actual_password VARCHAR(255);
+    
+    -- Verify the teacher's password
+    SELECT user_password INTO actual_password 
+    FROM teachers 
+    WHERE teacher_id = teacherID;
+    
+    IF actual_password != teacher_password THEN
+        SELECT 'Invalid password' AS message;
+        LEAVE proc_label;  -- Use LEAVE followed by the label name
+    END IF;
+
+    -- Query to get the list of students enrolled in the courses that the teacher teaches, along with their grades
+    SELECT 
+        t.teacher_id,
+        c.course_name,
+        s.student_id,
+        s.forename,
+        s.surname,
+        cs.result AS student_grade
+    FROM 
+        teachers AS t
+    JOIN 
+        course_teacher AS ct ON t.teacher_id = ct.teacher_id
+    JOIN 
+        course_semester AS csem ON ct.course_semester_id = csem.course_semester_id
+    JOIN 
+        courses AS c ON csem.course_id = c.course_id
+    JOIN 
+        course_student AS cs ON csem.course_semester_id = cs.course_semester_id
+    JOIN 
+        students AS s ON cs.student_id = s.student_id
+    WHERE 
+        t.teacher_id = teacherID;
+END
+
 //
 -- Reset the delimiter back to its default value
 DELIMITER ;
