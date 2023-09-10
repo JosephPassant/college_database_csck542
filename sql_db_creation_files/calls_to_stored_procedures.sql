@@ -1,3 +1,5 @@
+USE college;
+
 -- Calls the AssignCourseToSemester procedure in order to assign courses to semesters
 -- populating the course_semester table
 -- Inputs required (admin_username VARCHAR(30), admin_password VARCHAR(255),
@@ -73,3 +75,10 @@ CALL AssignResultToStudent('obi-wan_Kenobi', 'password5', 3, 4, 'Pass');
 CALL AssignResultToStudent('ki-adi_mundi', 'password6', 4, 6, 'Pass');
 CALL AssignResultToStudent('plo_koon', 'password7', 5, 9, 'Pass');
 
+CALL EnrollInCourse(20, 'password29', 'Jedi 101', 'Fall 2023');
+
+CALL AssignResultToStudent('master_yoda', 'password3', 20, 1, 'Pass');
+
+CALL GetStudentCoursesAndResults(20, 'password29');
+
+CALL ViewStudentsInMyCourses(1, 'password3');
