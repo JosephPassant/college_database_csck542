@@ -14,8 +14,8 @@ INSERT INTO admins (forename, surname, username, user_password) VALUES
 INSERT INTO teachers (forename, surname, username, user_password) VALUES
 ('Yoda', 'Master', 'master_yoda', 'password3'),
 ('Mace', 'Windu', 'mace_windu', 'password4'),
-('Obi-Wan', 'Kenobi', 'obi_wan', 'password5'),
-('Ki-Adi', 'Mundi', 'ki_adi_mundi', 'password6'),
+('Obi-Wan', 'Kenobi', 'obi-wan_kenobi', 'password5'),
+('Ki-Adi', 'Mundi', 'ki-adi_mundi', 'password6'),
 ('Plo', 'Koon', 'plo_koon', 'password7'),
 ('Shaak', 'Ti', 'shaak_ti', 'password8'),
 ('Kit', 'Fisto', 'kit_fisto', 'password9');
