@@ -53,15 +53,7 @@ CALL AssignStudentToCourse('george_lucas', 'password1', 17, 1);
 CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 18, 2);
 CALL AssignStudentToCourse('george_lucas', 'password1', 19, 4);
 CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 20, 6);
-CALL AssignStudentToCourse('george_lucas', 'password1', 1,9);
-CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 2, 9);
-CALL AssignStudentToCourse('george_lucas', 'password1', 3, 2);
-CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 4, 9);
-CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 5, 6);
-CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 6, 4);
-CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 7, 1);
-CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 8, 2);
-CALL AssignStudentToCourse('jeffrey_abrams', 'password2', 9, 9);
+
 
 -- Calls the AssignResultToCourse procedure in order to assign a Pass / Fail result
 -- to a student
