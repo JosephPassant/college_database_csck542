@@ -304,12 +304,11 @@ proc_label: BEGIN
 
     -- Query to get the list of students enrolled in the courses that the teacher teaches, along with their grades
     SELECT 
-        t.teacher_id,
         c.course_name,
         s.student_id,
         s.forename,
         s.surname,
-        cs.result AS student_grade
+        cs.result
     FROM 
         teachers AS t
     JOIN 
