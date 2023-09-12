@@ -174,14 +174,16 @@ BEGIN
     END IF;
 END;
 
-
+-- Create a stored procedure named 'EnrollInCourse' that enables students to enroll in a course
+-- available in a given semester
 CREATE PROCEDURE EnrollInCourse(
-    IN studentID INT,
-    IN student_password VARCHAR(255),
-    IN selected_course_name VARCHAR(255),
-    IN selected_semester_name VARCHAR(30)
+	IN studentID INT,                          -- Input for student ID
+    IN student_password VARCHAR(255),          -- Input for student password
+    IN selected_course_name VARCHAR(255),      -- Input for selected course name
+    IN selected_semester_name VARCHAR(30)      -- Input for selected semester name
 )
 proc_label: BEGIN  -- Define a label at the beginning of the compound statement
+	-- Declare variables for various checks and IDs
     DECLARE course_available INT;
     DECLARE is_already_enrolled INT;
     DECLARE selected_course_id INT;
@@ -242,12 +244,14 @@ proc_label: BEGIN  -- Define a label at the beginning of the compound statement
     END IF;
 END;
 
-
+-- Create a stored procedure named 'GetStudentCoursesAndResults' that enables students to view their
+-- courses and results for each cours
 CREATE PROCEDURE GetStudentCoursesAndResults(
-    IN studentID INT,
-    IN studentPassword VARCHAR(255)
+	IN studentID INT,                          -- Input for student ID
+    IN studentPassword VARCHAR(255)            -- Input for student password
 )
 proc_label: BEGIN
+	-- Declare variables for password verification
     DECLARE actual_password VARCHAR(255);
 
     -- Verify the student's password
@@ -278,11 +282,14 @@ proc_label: BEGIN
         
 END;
 
+-- Create a stored procedure named 'ViewStudentsInMyCourses' that enables teachers to view the list of students
+-- enrolled in the courses they are teaching, along with the grades of those students
 CREATE PROCEDURE ViewStudentsInMyCourses(
-    IN teacherID INT,
-    IN teacher_password VARCHAR(255)
+	IN teacherID INT,                          -- Input for teacher ID
+    IN teacher_password VARCHAR(255)           -- Input for teacher password
 )
 proc_label: BEGIN
+	-- Declare variables for password verification
     DECLARE actual_password VARCHAR(255);
     
     -- Verify the teacher's password
