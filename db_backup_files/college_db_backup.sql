@@ -68,7 +68,7 @@ CREATE TABLE `course_semester` (
 
 LOCK TABLES `course_semester` WRITE;
 /*!40000 ALTER TABLE `course_semester` DISABLE KEYS */;
-INSERT INTO `course_semester` VALUES (1,1,1),(6,2,2),(2,3,2),(7,4,1),(3,5,1),(8,6,2),(4,7,2),(9,8,1),(5,9,1),(10,10,2);
+INSERT INTO `course_semester` VALUES (1,1,1),(2,2,1),(3,3,1),(4,4,1),(5,5,1),(6,6,2),(7,7,2),(8,8,2),(9,9,2),(10,10,2);
 /*!40000 ALTER TABLE `course_semester` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +98,7 @@ CREATE TABLE `course_student` (
 
 LOCK TABLES `course_student` WRITE;
 /*!40000 ALTER TABLE `course_student` DISABLE KEYS */;
-INSERT INTO `course_student` VALUES (1,1,1,'Pass'),(2,2,7,NULL),(3,3,3,NULL),(4,4,9,NULL),(5,5,5,NULL),(6,6,1,'Pass'),(7,7,7,NULL),(8,8,3,NULL),(9,9,9,NULL),(10,10,5,NULL),(11,11,1,NULL),(12,12,7,NULL),(13,13,3,NULL),(14,14,9,NULL),(15,15,5,NULL),(16,16,1,NULL),(17,17,7,NULL),(18,18,3,NULL),(19,19,9,NULL),(20,20,5,NULL);
+INSERT INTO `course_student` VALUES (1,1,1,'Pass'),(2,2,2,'Fail'),(3,3,3,'Pass'),(4,4,4,'Pass'),(5,5,5,'Pass'),(6,6,1,'Pass'),(7,7,2,NULL),(8,8,3,NULL),(9,9,4,NULL),(10,10,5,NULL),(11,11,1,NULL),(12,12,2,NULL),(13,13,3,NULL),(14,14,4,NULL),(15,15,5,NULL),(16,16,1,NULL),(17,17,2,NULL),(18,18,3,NULL),(19,19,4,NULL),(20,20,5,NULL);
 /*!40000 ALTER TABLE `course_student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,7 +127,7 @@ CREATE TABLE `course_teacher` (
 
 LOCK TABLES `course_teacher` WRITE;
 /*!40000 ALTER TABLE `course_teacher` DISABLE KEYS */;
-INSERT INTO `course_teacher` VALUES (1,1,1),(2,2,2),(3,3,4),(4,4,6),(5,5,9);
+INSERT INTO `course_teacher` VALUES (1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5);
 /*!40000 ALTER TABLE `course_teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,6 +154,21 @@ LOCK TABLES `courses` WRITE;
 INSERT INTO `courses` VALUES (1,'Jedi 101'),(2,'The Force'),(3,'Ethics'),(4,'History'),(5,'Diplomacy'),(6,'Leadership'),(7,'Philosophy'),(8,'Medicine'),(9,'Combat'),(10,'Politics');
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `coursesofferedinsemester`
+--
+
+DROP TABLE IF EXISTS `coursesofferedinsemester`;
+/*!50001 DROP VIEW IF EXISTS `coursesofferedinsemester`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `coursesofferedinsemester` AS SELECT 
+ 1 AS `course_name`,
+ 1 AS `semester_name`,
+ 1 AS `start_date`,
+ 1 AS `end_date`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `semesters`
@@ -595,6 +610,24 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Final view structure for view `coursesofferedinsemester`
+--
+
+/*!50001 DROP VIEW IF EXISTS `coursesofferedinsemester`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb3 */;
+/*!50001 SET character_set_results     = utf8mb3 */;
+/*!50001 SET collation_connection      = utf8mb3_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `coursesofferedinsemester` AS select `c`.`course_name` AS `course_name`,`s`.`semester_name` AS `semester_name`,`s`.`start_date` AS `start_date`,`s`.`end_date` AS `end_date` from ((`course_semester` `cs` join `courses` `c` on((`cs`.`course_id` = `c`.`course_id`))) join `semesters` `s` on((`cs`.`semester_id` = `s`.`semester_id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -605,4 +638,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-14 20:15:36
+-- Dump completed on 2023-09-15  0:14:52
