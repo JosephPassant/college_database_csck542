@@ -78,46 +78,6 @@ BEGIN
     END IF;
 END;
 
-
--- Create a stored procedure named 'AssignStudentToCourse' to allow administrators to enroll a student
--- in a course that has been assigned to run in a semester
-CREATE PROCEDURE AssignStudentToCourse(
-    IN admin_username VARCHAR(30),             -- Input for admin username
-    IN admin_password VARCHAR(255),            -- Input for admin password
-    IN selected_student_id INT,                -- Input for selected student ID
-    IN selected_course_semester_id INT         -- Input for selected course-semester ID
-)
-BEGIN
-    -- Declare variables to hold counts
-    DECLARE admin_count INT DEFAULT 0;         -- Variable to hold the count of matching admin records
-    DECLARE existing_count INT DEFAULT 0;      -- Variable to hold the count of existing student-course assignments
-
-    -- Validate admin credentials by counting matching records in the 'admins' table
-    SELECT COUNT(*) INTO admin_count 
-    FROM admins 
-    WHERE username = admin_username AND user_password = SHA2(admin_password,256);
-
-    -- If admin credentials are valid (count is 1), proceed
-    IF admin_count = 1 THEN
-        -- Check if the student is already assigned to the course-semester by counting matching records
-        SELECT COUNT(*) INTO existing_count
-        FROM course_student
-        WHERE student_id = selected_student_id AND course_semester_id = selected_course_semester_id;
-
-        -- If the student is not already assigned to the course-semester (count is 0), assign them
-        IF existing_count = 0 THEN
-            INSERT INTO course_student (student_id, course_semester_id)
-            VALUES (selected_student_id, selected_course_semester_id);
-            SELECT 'Student successfully assigned to course' AS message;  -- Success message
-        ELSE
-            SELECT 'Student is already assigned the course' AS message;  -- Error message
-        END IF;
-    ELSE
-        SELECT 'Invalid admin username or password' AS message;  -- Error message for invalid admin credentials
-    END IF;
-END;
-
-
 -- Create a stored procedure named 'AssignResultToStudent' that enables teachers of students on a course to assign
 -- a Pass or Fail result to a student enrolled in the course
 CREATE PROCEDURE AssignResultToStudent(
@@ -302,7 +262,7 @@ proc_label: BEGIN
         LEAVE proc_label;  -- Use LEAVE followed by the label name
     END IF;
 
-    -- Query to get the list of students enrolled in the courses that the teacher teaches, along with their grades
+    -- Query to get the list of students enrolled in the courses that the teacher teaches, along with their result
     SELECT 
         c.course_name,
         s.student_id,
