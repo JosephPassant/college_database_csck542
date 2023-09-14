@@ -89,7 +89,7 @@ CREATE TABLE `course_student` (
   KEY `course_semester_id` (`course_semester_id`),
   CONSTRAINT `course_student_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`),
   CONSTRAINT `course_student_ibfk_2` FOREIGN KEY (`course_semester_id`) REFERENCES `course_semester` (`course_semester_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `course_student` (
 
 LOCK TABLES `course_student` WRITE;
 /*!40000 ALTER TABLE `course_student` DISABLE KEYS */;
-INSERT INTO `course_student` VALUES (1,1,1,'Pass'),(2,2,2,'Fail'),(3,3,4,'Pass'),(4,4,6,'Pass'),(5,5,9,'Pass'),(6,6,1,NULL),(7,7,2,NULL),(8,8,4,NULL),(9,9,6,NULL),(10,10,9,NULL),(11,11,1,NULL),(12,12,2,NULL),(13,13,4,NULL),(14,14,6,NULL),(15,15,9,NULL),(16,16,9,NULL),(17,17,1,NULL),(18,18,2,NULL),(19,19,4,NULL),(20,20,6,NULL),(21,20,1,'Pass');
+INSERT INTO `course_student` VALUES (1,1,1,'Pass'),(2,2,7,NULL),(3,3,3,NULL),(4,4,9,NULL),(5,5,5,NULL),(6,6,1,'Pass'),(7,7,7,NULL),(8,8,3,NULL),(9,9,9,NULL),(10,10,5,NULL),(11,11,1,NULL),(12,12,7,NULL),(13,13,3,NULL),(14,14,9,NULL),(15,15,5,NULL),(16,16,1,NULL),(17,17,7,NULL),(18,18,3,NULL),(19,19,9,NULL),(20,20,5,NULL);
 /*!40000 ALTER TABLE `course_student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,21 +154,6 @@ LOCK TABLES `courses` WRITE;
 INSERT INTO `courses` VALUES (1,'Jedi 101'),(2,'The Force'),(3,'Ethics'),(4,'History'),(5,'Diplomacy'),(6,'Leadership'),(7,'Philosophy'),(8,'Medicine'),(9,'Combat'),(10,'Politics');
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Temporary view structure for view `coursesofferedinsemester`
---
-
-DROP TABLE IF EXISTS `coursesofferedinsemester`;
-/*!50001 DROP VIEW IF EXISTS `coursesofferedinsemester`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `coursesofferedinsemester` AS SELECT 
- 1 AS `course_name`,
- 1 AS `semester_name`,
- 1 AS `start_date`,
- 1 AS `end_date`*/;
-SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `semesters`
@@ -259,9 +244,9 @@ UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET character_set_client  = utf8mb3 */ ;
+/*!50003 SET character_set_results = utf8mb3 */ ;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
@@ -309,9 +294,9 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET character_set_client  = utf8mb3 */ ;
+/*!50003 SET character_set_results = utf8mb3 */ ;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
@@ -359,9 +344,9 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET character_set_client  = utf8mb3 */ ;
+/*!50003 SET character_set_results = utf8mb3 */ ;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
@@ -423,63 +408,13 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `AssignStudentToCourse` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `AssignStudentToCourse`(
-    IN admin_username VARCHAR(30),             -- Input for admin username
-    IN admin_password VARCHAR(255),            -- Input for admin password
-    IN selected_student_id INT,                -- Input for selected student ID
-    IN selected_course_semester_id INT         -- Input for selected course-semester ID
-)
-BEGIN
-    -- Declare variables to hold counts
-    DECLARE admin_count INT DEFAULT 0;         -- Variable to hold the count of matching admin records
-    DECLARE existing_count INT DEFAULT 0;      -- Variable to hold the count of existing student-course assignments
-
-    -- Validate admin credentials by counting matching records in the 'admins' table
-    SELECT COUNT(*) INTO admin_count 
-    FROM admins 
-    WHERE username = admin_username AND user_password = SHA2(admin_password,256);
-
-    -- If admin credentials are valid (count is 1), proceed
-    IF admin_count = 1 THEN
-        -- Check if the student is already assigned to the course-semester by counting matching records
-        SELECT COUNT(*) INTO existing_count
-        FROM course_student
-        WHERE student_id = selected_student_id AND course_semester_id = selected_course_semester_id;
-
-        -- If the student is not already assigned to the course-semester (count is 0), assign them
-        IF existing_count = 0 THEN
-            INSERT INTO course_student (student_id, course_semester_id)
-            VALUES (selected_student_id, selected_course_semester_id);
-            SELECT 'Student successfully assigned to course' AS message;  -- Success message
-        ELSE
-            SELECT 'Student is already assigned the course' AS message;  -- Error message
-        END IF;
-    ELSE
-        SELECT 'Invalid admin username or password' AS message;  -- Error message for invalid admin credentials
-    END IF;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `EnrollInCourse` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET character_set_client  = utf8mb3 */ ;
+/*!50003 SET character_set_results = utf8mb3 */ ;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
@@ -559,9 +494,9 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET character_set_client  = utf8mb3 */ ;
+/*!50003 SET character_set_results = utf8mb3 */ ;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
@@ -609,9 +544,9 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET character_set_client  = utf8mb3 */ ;
+/*!50003 SET character_set_results = utf8mb3 */ ;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
@@ -633,14 +568,13 @@ proc_label: BEGIN
         LEAVE proc_label;  -- Use LEAVE followed by the label name
     END IF;
 
-    -- Query to get the list of students enrolled in the courses that the teacher teaches, along with their grades
+    -- Query to get the list of students enrolled in the courses that the teacher teaches, along with their result
     SELECT 
-        t.teacher_id,
         c.course_name,
         s.student_id,
         s.forename,
         s.surname,
-        cs.result AS student_grade
+        cs.result
     FROM 
         teachers AS t
     JOIN 
@@ -661,24 +595,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-
---
--- Final view structure for view `coursesofferedinsemester`
---
-
-/*!50001 DROP VIEW IF EXISTS `coursesofferedinsemester`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `coursesofferedinsemester` AS select `c`.`course_name` AS `course_name`,`s`.`semester_name` AS `semester_name`,`s`.`start_date` AS `start_date`,`s`.`end_date` AS `end_date` from ((`course_semester` `cs` join `courses` `c` on((`cs`.`course_id` = `c`.`course_id`))) join `semesters` `s` on((`cs`.`semester_id` = `s`.`semester_id`))) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -689,4 +605,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-12  1:23:58
+-- Dump completed on 2023-09-14 20:15:36
