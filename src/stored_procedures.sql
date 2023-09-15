@@ -4,15 +4,15 @@ DELIMITER //
 -- Create a stored procedure named 'AssignCourseToSemester' which enables admins to assign a course
 -- to run in a given semester
 CREATE PROCEDURE AssignCourseToSemester(
-    IN admin_username VARCHAR(30),  -- Input for admin username
-    IN admin_password VARCHAR(255), -- Input for admin password
-    IN selected_course_id INT,      -- Input for selected course ID
-    IN selected_semester_id INT     -- Input for selected semester ID
+    IN admin_username VARCHAR(30),  -
+    IN admin_password VARCHAR(255), 
+    IN selected_course_id INT,      
+    IN selected_semester_id INT     
 )
 BEGIN
     -- Declare variables to hold counts
-    DECLARE admin_count INT DEFAULT 0;    -- Variable to hold the count of matching admin records
-    DECLARE existing_count INT DEFAULT 0; -- Variable to hold the count of existing course-semester assignments
+    DECLARE admin_count INT DEFAULT 0;    
+    DECLARE existing_count INT DEFAULT 0; 
 
     -- Validate admin credentials by counting matching records in the 'admins' table
     SELECT COUNT(*) INTO admin_count 
@@ -30,12 +30,12 @@ BEGIN
         IF existing_count = 0 THEN
             INSERT INTO course_semester (course_id, semester_id) 
             VALUES (selected_course_id, selected_semester_id);
-            SELECT 'Course successfully assigned to semester' AS message; -- Success message
+            SELECT 'Course successfully assigned to semester' AS message; 
         ELSE
-            SELECT 'This course is already assigned to the given semester' AS message; -- Error message
+            SELECT 'This course is already assigned to the given semester' AS message; 
         END IF;
     ELSE
-        SELECT 'Invalid admin username or password' AS message; -- Error message for invalid admin credentials
+        SELECT 'Invalid admin username or password' AS message; 
     END IF;
 END;
 
@@ -43,15 +43,15 @@ END;
 -- Create a stored procedure named 'AssignCourseToTeacher' which enables admins to assign a teacher to a course 
 -- that has been assigned to run in a semester
 CREATE PROCEDURE AssignCourseToTeacher(
-    IN admin_username VARCHAR(30),             -- Input for admin username
-    IN admin_password VARCHAR(255),            -- Input for admin password
-    IN selected_teacher_id INT,                -- Input for selected teacher ID
-    IN selected_course_semester_id INT         -- Input for selected course-semester ID
+    IN admin_username VARCHAR(30),             
+    IN admin_password VARCHAR(255),            
+    IN selected_teacher_id INT,                
+    IN selected_course_semester_id INT         
 )
 BEGIN
     -- Declare variables to hold counts
-    DECLARE admin_count INT DEFAULT 0;         -- Variable to hold the count of matching admin records
-    DECLARE existing_count INT DEFAULT 0;      -- Variable to hold the count of existing teacher-course assignments
+    DECLARE admin_count INT DEFAULT 0;         
+    DECLARE existing_count INT DEFAULT 0;      
 
     -- Validate admin credentials by counting matching records in the 'admins' table
     SELECT COUNT(*) INTO admin_count 
@@ -69,30 +69,30 @@ BEGIN
         IF existing_count = 0 THEN
             INSERT INTO course_teacher (teacher_id, course_semester_id)
             VALUES (selected_teacher_id, selected_course_semester_id);
-            SELECT 'Teacher successfully assigned to course' AS message;  -- Success message
+            SELECT 'Teacher successfully assigned to course' AS message;  
         ELSE
-            SELECT 'Teacher is already assigned the course' AS message;  -- Error message
+            SELECT 'Teacher is already assigned the course' AS message;  
         END IF;
     ELSE
-        SELECT 'Invalid admin username or password' AS message;  -- Error message for invalid admin credentials
+        SELECT 'Invalid admin username or password' AS message;  
     END IF;
 END;
 
 -- Create a stored procedure named 'AssignResultToStudent' that enables teachers of students on a course to assign
 -- a Pass or Fail result to a student enrolled in the course
 CREATE PROCEDURE AssignResultToStudent(
-    IN teacher_username VARCHAR(30),            -- Input for teacher username
-    IN teacher_password VARCHAR(255),           -- Input for teacher password
-    IN selected_student_id INT,                 -- Input for selected student ID
-    IN selected_course_semester_id INT,         -- Input for selected course-semester ID
-    IN given_result ENUM('Pass', 'Fail')        -- Input for the result to be assigned
+    IN teacher_username VARCHAR(30),            
+    IN teacher_password VARCHAR(255),           
+    IN selected_student_id INT,                 
+    IN selected_course_semester_id INT,         
+    IN given_result ENUM('Pass', 'Fail')        
 )
 BEGIN
     -- Declare variables to hold counts and IDs
-    DECLARE selected_teacher_id INT DEFAULT 0;  -- Variable to hold the teacher ID
-    DECLARE teacher_count INT DEFAULT 0;        -- Variable to hold the count of matching teacher records
-    DECLARE teacher_course_count INT DEFAULT 0; -- Variable to hold the count of teacher-course assignments
-    DECLARE student_count INT DEFAULT 0;        -- Variable to hold the count of student-course enrollments
+    DECLARE selected_teacher_id INT DEFAULT 0;  
+    DECLARE teacher_count INT DEFAULT 0;        
+    DECLARE teacher_course_count INT DEFAULT 0; 
+    DECLARE student_count INT DEFAULT 0;        
 
     -- Validate teacher credentials by counting matching records in the 'teachers' table
     SELECT COUNT(*) INTO teacher_count 
@@ -111,9 +111,9 @@ BEGIN
 
     -- Validate teacher credentials and course assignment
     IF teacher_count = 0 THEN
-        SELECT 'Invalid teacher username or password' AS message;  -- Error message for invalid teacher credentials
+        SELECT 'Invalid teacher username or password' AS message;  
     ELSEIF teacher_course_count = 0 THEN
-        SELECT 'Teacher not assigned to the course for the given semester' AS message;  -- Error message for unassigned teacher
+        SELECT 'Teacher not assigned to the course for the given semester' AS message;  
     ELSE
         -- Check if the student is enrolled in the course for the given semester
         SELECT COUNT(*) INTO student_count
@@ -122,14 +122,14 @@ BEGIN
 
         -- Validate student enrollment
         IF student_count = 0 THEN
-            SELECT 'Student not enrolled in the course for the given semester' AS message;  -- Error message for unenrolled student
+            SELECT 'Student not enrolled in the course for the given semester' AS message; 
         ELSE
             -- Assign the result to the student for the course in the given semester
             UPDATE course_student
             SET result = given_result
             WHERE student_id = selected_student_id AND course_semester_id = selected_course_semester_id;
 
-            SELECT 'Result successfully assigned to student' AS message;  -- Success message
+            SELECT 'Result successfully assigned to student' AS message; 
         END IF;
     END IF;
 END;
@@ -137,10 +137,10 @@ END;
 -- Create a stored procedure named 'EnrollInCourse' that enables students to enroll in a course
 -- available in a given semester
 CREATE PROCEDURE EnrollInCourse(
-	IN studentID INT,                          -- Input for student ID
-    IN student_password VARCHAR(255),          -- Input for student password
-    IN selected_course_name VARCHAR(255),      -- Input for selected course name
-    IN selected_semester_name VARCHAR(30)      -- Input for selected semester name
+	IN studentID INT,                          
+    IN student_password VARCHAR(255),          
+    IN selected_course_name VARCHAR(255),      
+    IN selected_semester_name VARCHAR(30)      
 )
 proc_label: BEGIN  -- Define a label at the beginning of the compound statement
 	-- Declare variables for various checks and IDs
@@ -164,7 +164,7 @@ proc_label: BEGIN  -- Define a label at the beginning of the compound statement
     
     IF actual_password != SHA2(student_password,256) THEN
         SELECT 'Invalid password' AS message;
-        LEAVE proc_label;  -- Use LEAVE followed by the label name
+        LEAVE proc_label;  
     END IF;
 
     -- Get the selected_course_id and selected_semester_id
@@ -207,8 +207,8 @@ END;
 -- Create a stored procedure named 'GetStudentCoursesAndResults' that enables students to view their
 -- courses and results for each cours
 CREATE PROCEDURE GetStudentCoursesAndResults(
-	IN studentID INT,                          -- Input for student ID
-    IN studentPassword VARCHAR(255)            -- Input for student password
+	IN studentID INT,                          
+    IN studentPassword VARCHAR(255)            
 )
 proc_label: BEGIN
 	-- Declare variables for password verification
@@ -221,14 +221,14 @@ proc_label: BEGIN
 
     IF actual_password != SHA2(studentPassword,256) THEN
         SELECT 'Invalid password' AS message;
-        LEAVE proc_label;  -- Use LEAVE followed by the label name
+        LEAVE proc_label;  
     END IF;
 
     -- If password is verified, fetch the enrolled courses and grades
     SELECT 
         c.course_name,
         s.semester_name,
-        cs.result  -- Assuming result is stored in course_student table
+        cs.result  
     FROM 
         course_student AS cs
     JOIN 
@@ -245,8 +245,8 @@ END;
 -- Create a stored procedure named 'ViewStudentsInMyCourses' that enables teachers to view the list of students
 -- enrolled in the courses they are teaching, along with the grades of those students
 CREATE PROCEDURE ViewStudentsInMyCourses(
-	IN teacherID INT,                          -- Input for teacher ID
-    IN teacher_password VARCHAR(255)           -- Input for teacher password
+	IN teacherID INT,                          
+    IN teacher_password VARCHAR(255)           
 )
 proc_label: BEGIN
 	-- Declare variables for password verification
@@ -259,7 +259,7 @@ proc_label: BEGIN
     
     IF actual_password != SHA2(teacher_password, 256) THEN
         SELECT 'Invalid password' AS message;
-        LEAVE proc_label;  -- Use LEAVE followed by the label name
+        LEAVE proc_label; 
     END IF;
 
     -- Query to get the list of students enrolled in the courses that the teacher teaches, along with their result
@@ -285,6 +285,6 @@ proc_label: BEGIN
         t.teacher_id = teacherID;
 END;
 //
--- Reset the delimiter back to its default value
+-- Reset the delimiter to its default value
 DELIMITER ;
 
