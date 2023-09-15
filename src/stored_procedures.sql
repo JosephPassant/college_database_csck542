@@ -4,7 +4,7 @@ DELIMITER //
 -- Create a stored procedure named 'AssignCourseToSemester' which enables admins to assign a course
 -- to run in a given semester
 CREATE PROCEDURE AssignCourseToSemester(
-    IN admin_username VARCHAR(30),  -
+    IN admin_username VARCHAR(30), 
     IN admin_password VARCHAR(255), 
     IN selected_course_id INT,      
     IN selected_semester_id INT     
