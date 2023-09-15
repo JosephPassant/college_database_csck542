@@ -2,13 +2,13 @@
 CREATE VIEW CoursesOfferedInSemester AS
 -- Select relevant columns to be included in the view
 SELECT 
-    c.course_name,       -- Name of the course from courses
-    s.semester_name,     -- Name of the semester from semesters
-    s.start_date,        -- Start date of the semester from semesters table
-    s.end_date           -- End date of the semester from semesters table
+    c.course_name,       
+    s.semester_name,     
+    s.start_date,        
+    s.end_date           
 -- Specify the source table for the view
 FROM 
-    course_semester AS cs  -- course_semester table serves as the base table
+    course_semester AS cs 
 -- Join course_semester with courses on course_id
 JOIN courses AS c ON cs.course_id = c.course_id
 -- Join course_semester with semesters on semester_id
